@@ -11,3 +11,4 @@ services:
       - 4000:4000 # UI_PORT
       - 8085:8085 # PUBSUB_PORT
       - 5001:5001 # FUNCTIONS_PORT
+      - 9099:9099 # AUTH_PORT
