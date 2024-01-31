@@ -44,3 +44,17 @@ In case you would like to change function behavior it will not automatically pic
 So for that you would need to rebuild the image and start container again with new image
 
 `docker compose up -d --build` or `docker-compose up -d --build`
+
+// TODO
+
+I guess there might be some way to connect fucntions to the emulator without rebuilding:
+
+https://firebase.google.com/docs/functions/local-emulator#web-modular-api
+
+```
+const functions = getFunctions(getApp());
+connectFunctionsEmulator(functions, "127.0.0.1", 5001);
+```
+
+I will revise.
+
