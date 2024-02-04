@@ -6,7 +6,7 @@ RUN npm install -g firebase-tools
 
 COPY . .
 
-RUN npm --prefix ./functions install
+RUN npm --prefix ./functions ci
 
 # somehow the docker didn't see entrypoint.sh if I just copy it from the source folder however it does exist when checking with `ls la`
 RUN echo '#!/bin/sh \n firebase emulators:start' > ./entrypoint.sh && \
