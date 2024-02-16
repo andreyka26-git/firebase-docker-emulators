@@ -1,10 +1,10 @@
 version: '3'
 
 services:
-  firebase:
-    container_name: firebase-emulator
+  firebase-functions:
+    container_name: firebase-functions
     build:
-      context: .
+      context: ./function-firestore
     ports:
       - 8080:8080 # FIRESTORE_PORT
       - 5005:5005 # FIRESTORE_WS_PORT

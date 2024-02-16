@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  firebase:
+    container_name: firebase
+    build:
+      context: ./common-firebase-emulator
+    ports:
+      - 8080:8080 # FIRESTORE_PORT
+      - 5005:5005 # FIRESTORE_WS_PORT
+      - 4000:4000 # UI_PORT
+      - 8085:8085 # PUBSUB_PORT
+      - 5001:5001 # FUNCTIONS_PORT
+      - 9099:9099 # AUTH_PORT
+  
+  nodejs-server:
+    container_name: nodejs-server
+    build:
+      context: ./nodejs-firestore-auth
+    ports:
+      - "3000:3000"
