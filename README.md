@@ -1,4 +1,9 @@
-# firebase-docker-emulators
+# common-firebase-emulator
+
+It is just docker file that can build basic emulators: auth, firestore.
+To access ui: https://localhost:4000
+
+# firebase-function
 
 ## How to run emulator inside the docker
 
@@ -44,8 +49,3 @@ In case you would like to change function behavior it will not automatically pic
 So for that you would need to rebuild the image and start container again with new image
 
 `docker compose up -d --build` or `docker-compose up -d --build`
-
-## Node js
-
-For node js we need to export serviceAccountKey.json from google acc, and specify the project.
-
