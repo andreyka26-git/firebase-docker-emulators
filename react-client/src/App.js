@@ -1,11 +1,27 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { logOut, signInWithEmailPassword, subscribeToUserUpdate } from './services/auth-service';
+import { getIdToken, logOut, signInWithEmailPassword, subscribeToUserUpdate } from './services/auth-service';
+import axios from 'axios';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [rendering, setRendering] = useState(true);
+
+  async function callService() {
+    const token = await getIdToken();
+
+    try {
+      const response = await axios.get('http://localhost:5000/test', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log('Response:', response.data);
+    } catch (error) {
+      console.error('Error making API call:', error);
+    }
+  }
 
   useEffect(() => {
     subscribeToUserUpdate(async (user) => {
@@ -34,10 +50,7 @@ function App() {
         <Route path="/" element={
           <>
             {authenticated ? (
-             <button onClick={async () => {
-              await logOut();
-              //window.location.href = '/main';
-            }}>log out</button>
+              <button onClick={logOut}>log out</button>
             ) : (
               <button onClick={async () => {
                 await signInWithEmailPassword();
@@ -50,9 +63,14 @@ function App() {
         <Route path="/main" element={
           <>
             {!authenticated ?
-              <>not auth</> :
-              <> <button onClick={}>
-                </button></>}
+              <>
+              not authed
+              <button onClick={() => window.location.href = '/'}>go to '/'</button>
+              </> :
+              <>
+                <button onClick={callService}>call service</button>
+                <button onClick={logOut}>log out</button>
+              </>}
           </>
         } />
       </Routes>
