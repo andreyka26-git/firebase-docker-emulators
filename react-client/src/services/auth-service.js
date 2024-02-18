@@ -19,13 +19,13 @@ export async function getCurrentUser() {
 
 export async function signInWithEmailPassword() {
     try {
-        const userCredential = await signInWithEmailAndPassword(auth, "b.andriy.b2000@gmail.com", "pass123*");
+        const userCredential = await signInWithEmailAndPassword(auth, "someemail@gmail.com", "passP123*");
         const user = userCredential.user;
 
         return user;
     } catch (error) {
         if (error.code === "auth/user-not-found") {
-            const newUserCredential = await createUserWithEmailAndPassword(auth, "b.andriy.b2000@gmail.com", "pass123*");
+            const newUserCredential = await createUserWithEmailAndPassword(auth, "someemail@gmail.com", "passP123*");
             const newUser = newUserCredential.user;
 
             return newUser;

@@ -1,5 +1,8 @@
 require('dotenv').config();
+var serviceAccount = require('./serviceAccountKey.json');
+
 const express = require('express');
+const admin = require("firebase-admin");
 const { initializeApp } = require("firebase-admin/app");
 const { firestore } = require("firebase-admin");
 const { getAuth } = require('firebase-admin/auth');
@@ -15,10 +18,16 @@ if (process.env.ENVIRONMENT === 'local') {
     // this is necessary in case you are running locally against emulator
     process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080';
     process.env.FIREBASE_AUTH_EMULATOR_HOST = 'localhost:9099';
+
+    // here project id is needed for nodejs
+    initializeApp({ projectId: process.env.PROJECT_ID });
+} else {
+    initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        //databaseURL: 'https://my-project.firebaseio.com'
+    });
 }
 
-// here project id is needed for nodejs
-initializeApp({ projectId: process.env.PROJECT_ID });
 
 const authMiddleware = async (req, res, next) => {
     let idToken;
