@@ -1,10 +1,11 @@
 version: '3'
 
 services:
-  common-firebase-emulator:
-    container_name: common-firebase-emulator
+  firebase-emulator:
+    container_name: firebase-emulator
     build:
       context: ./common-firebase-emulator
+    image: firebase-emulator:latest
     ports:
       - 8080:8080 # FIRESTORE_PORT
       - 5005:5005 # FIRESTORE_WS_PORT

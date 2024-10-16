@@ -3,6 +3,24 @@
 It is just docker file that can build basic emulators: auth, firestore.
 To access ui: https://localhost:4000
 
+## Pull from docker registry
+
+`docker run -d --name firebase-emulator -p 8080:8080 -p 5005:5005 -p 4000:4000 -p 9099:9099 andreyka26/firebase-emulator:latest`
+
+To push
+```
+docker tag firebase-emulator:latest andreyka26/firebase-emulator:latest
+docker push andreyka26/firebase-emulator:latest
+```
+
+https://hub.docker.com/u/andreyka26
+
+
+## Build on your own
+
+This is for auth and firestore without functions
+`docker compose -f docker-compose.common-firebase-emulator.yml up`
+
 # firebase-function
 
 ## How to run emulator inside the docker
